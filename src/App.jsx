@@ -29,7 +29,16 @@ function baseFromPathname(pathname) {
 
 export default function App() {
   const base = resolveBaseUrl();
+
+  // local assets resolved against the current deployment base
   const chickenSrc = `${base}chicken.jpg`;
+  const imgs = {
+    globalProblem:            `${base}global-problem.png`,
+    enhancedOrganic:          `${base}enhanced-organic.png`,
+    renewableFuel:            `${base}renewable-fuel.png`,
+    syntheticFertilizerDecarb:`${base}synthetic-fertilizer-decarbonization.png`,
+    multipleFarm:             `${base}multiple-farm-opportunities.png`,
+  };
 
   const tests = [
     { name: "root", pathname: "/", expected: "/" },
@@ -123,6 +132,102 @@ export default function App() {
           </div>
         </section>
 
+        {/* DIAGRAMS / IMAGES */}
+        <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
+          <h2 className="text-4xl font-semibold">Diagrams & Opportunities</h2>
+          <div className="mt-10 space-y-16">
+            {/* Global Problem */}
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <img
+                src={imgs.globalProblem}
+                alt="Global Problem flow diagram"
+                className="rounded-2xl border border-white/10 w-full"
+              />
+              <div>
+                <h3 className="text-3xl font-bold">Global Problem</h3>
+                <p className="mt-4 text-white/90">
+                  Explore today’s emissions, farm impacts, and downstream effects.
+                </p>
+                <a href={imgs.globalProblem} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
+                  Open Diagram
+                </a>
+              </div>
+            </div>
+
+            {/* Enhanced Organic Fertilizer Production */}
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div className="order-2 lg:order-1">
+                <h3 className="text-3xl font-bold">Solution: Enhanced Organic Fertilizer Production</h3>
+                <p className="mt-4 text-white/90">
+                  How renewable nitric acid boosts organic fertilizer value and yields.
+                </p>
+                <a href={imgs.enhancedOrganic} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
+                  Open Diagram
+                </a>
+              </div>
+              <img
+                src={imgs.enhancedOrganic}
+                alt="Enhanced Organic Fertilizer Production diagram"
+                className="rounded-2xl border border-white/10 w-full order-1 lg:order-2"
+              />
+            </div>
+
+            {/* Renewable Fuel Production */}
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <img
+                src={imgs.renewableFuel}
+                alt="Renewable Fuel Production diagram"
+                className="rounded-2xl border border-white/10 w-full"
+              />
+              <div>
+                <h3 className="text-3xl font-bold">Solution: Renewable Fuel Production</h3>
+                <p className="mt-4 text-white/90">
+                  Couple digesters with plasma to upgrade biogas and fuel pathways.
+                </p>
+                <a href={imgs.renewableFuel} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
+                  Open Diagram
+                </a>
+              </div>
+            </div>
+
+            {/* Synthetic Fertilizer Industry Decarbonization */}
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div className="order-2 lg:order-1">
+                <h3 className="text-3xl font-bold">Solution: Synthetic Fertilizer Industry Decarbonization</h3>
+                <p className="mt-4 text-white/90">
+                  Hybridize existing plants with green nitrogen modules.
+                </p>
+                <a href={imgs.syntheticFertilizerDecarb} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
+                  Open Diagram
+                </a>
+              </div>
+              <img
+                src={imgs.syntheticFertilizerDecarb}
+                alt="Synthetic Fertilizer Industry Decarbonization diagram"
+                className="rounded-2xl border border-white/10 w-full order-1 lg:order-2"
+              />
+            </div>
+
+            {/* Multiple Farm Application Opportunities */}
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <img
+                src={imgs.multipleFarm}
+                alt="Multiple Farm Application Opportunities diagram"
+                className="rounded-2xl border border-white/10 w-full"
+              />
+              <div>
+                <h3 className="text-3xl font-bold">Multiple Farm Application Opportunities</h3>
+                <p className="mt-4 text-white/90">
+                  A landscape of routes to value across fuels, fertilizer, and materials.
+                </p>
+                <a href={imgs.multipleFarm} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
+                  Open Diagram
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* TECHNOLOGY */}
         <section id="technology" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
           <h2 className="text-4xl font-semibold">Technology</h2>
@@ -186,14 +291,14 @@ export default function App() {
           </div>
         </section>
 
-        {/* OVERVIEW */}
+        {/* OVERVIEW (updated to your pitch video) */}
         <section id="overview" className="mx-auto max-w-7xl px-6 py-20">
           <h2 className="text-3xl font-semibold">Let's talk about N2bio</h2>
           <div className="mt-6 aspect-video max-w-5xl mx-auto rounded-xl overflow-hidden border border-white/10">
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/vEa7KJBTRAw"
-              title="Let's talk about N2bio"
+              src="https://www.youtube.com/embed/t1R0xygjFOQ"
+              title="N2Bio Pitch"
               frameBorder={0}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
