@@ -133,7 +133,7 @@ export default function App() {
 
         {/* DIAGRAMS / IMAGES */}
         <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
-          /*<h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>*/
+          //<h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>
           <div className="mt-10 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -179,32 +179,14 @@ export default function App() {
                 className="rounded-2xl border border-white/10 w-full"
               />
               <div>
-                <h3 className="text-3xl font-bold">Solution: Renewable Fuel Production</h3>
+                <h3 className="text-3xl font-bold">Economic upside </h3>
                 <p className="mt-4 text-white/90">
-                  Couple digesters with plasma to upgrade biogas and fuel pathways.
+                  Farms will use an Anaerobic Digester Plant to produce Biogas, but it consumes energy to use, resulting in a high price of its product. By incorporating a Plasma fertilizer production systems, famers wil be able to supply their digesters with the heat produced by the plasma plant, and the Plasma plant can fix the ammonia waste from the digester into additional fertilizer, thereby increasing the efficiency of both systems. This results in lower cost of both fertilizer and biogas products.
                 </p>
                 <a href={imgs.renewableFuel} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
                 </a>
               </div>
-            </div>
-
-            {/* Synthetic Fertilizer Industry Decarbonization */}
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div className="order-2 lg:order-1">
-                <h3 className="text-3xl font-bold">Solution: Synthetic Fertilizer Industry Decarbonization</h3>
-                <p className="mt-4 text-white/90">
-                  Hybridize existing plants with green nitrogen modules.
-                </p>
-                <a href={imgs.syntheticFertilizerDecarb} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
-                  Open Diagram
-                </a>
-              </div>
-              <img
-                src={imgs.syntheticFertilizerDecarb}
-                alt="Synthetic Fertilizer Industry Decarbonization diagram"
-                className="rounded-2xl border border-white/10 w-full order-1 lg:order-2"
-              />
             </div>
 
             {/* Multiple Farm Application Opportunities */}
@@ -234,7 +216,7 @@ export default function App() {
             Our nitrogen fixation technology is built on Cerawave™ microwave plasma torches, which replace
             conventional copper inductors with high-purity ceramic rings to achieve exceptional efficiency
             and durability. Operating at 915 MHz with 100 kW magnetrons, the torches generate stable,
-            near-atmospheric plasma inside a quartz chamber, enabling the direct conversion of nitrogen
+            near-atmospheric plasma, enabling the direct conversion of nitrogen
             and oxygen into nitric oxide and ultimately nitric acid. This closed-loop system consumes
             only air, water, a small amount of argon, and electricity—eliminating the need for high-pressure,
             catalyst-driven methods like Haber-Bosch and Ostwald. By coupling high plasma efficiency with
@@ -252,7 +234,7 @@ export default function App() {
               Radom plasma makes <strong>Nitric Acid</strong> from air, water, and electricity on the farm.
             </li>
             <li className="rounded-xl border border-white/10 bg-white/10 p-4">
-              Heat from the plasma torch is recycled to release <strong>ammonia</strong> from digester water.
+              Heat from the plasma torch is recycled to release <strong>ammonia</strong> from liquid digestate.
             </li>
             <li className="rounded-xl border border-white/10 bg-white/10 p-4">
               <strong>Nitric Acid</strong> and <strong>Ammonia</strong> are combined to make fertilizer.
@@ -276,7 +258,7 @@ export default function App() {
               </div>
               <div className="rounded-xl border border-white/10 bg-white/10 p-6">
                 <h3 className="font-semibold">Water Reuse &amp; Lower Emissions</h3>
-                <p className="mt-2 text-white/80">Water is reused and ammonia greenhouse emissions are eliminated.</p>
+                <p className="mt-2 text-white/80">Water is reused and ammonia greenhouse emissions are eliminated, heat from plasma is reused.</p>
               </div>
               <div className="rounded-xl border border-white/10 bg-white/10 p-6">
                 <h3 className="font-semibold">Organic Fertilizer Revenue</h3>
