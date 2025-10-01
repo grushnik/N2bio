@@ -125,7 +125,7 @@ export default function App() {
                 />
               </div>
               <p className="mt-3 text-sm text-white/80">
-                What do chickens and plasma torches have in common? The future of farming.
+                What do chickens and high-temperature plasma have in common? The future of farming.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function App() {
 
         {/* DIAGRAMS / IMAGES */}
         <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
-          <h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>
+          /*<h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>*/
           <div className="mt-10 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -145,7 +145,7 @@ export default function App() {
               <div>
                 <h3 className="text-3xl font-bold">The Problem We are Facing Today</h3>
                 <p className="mt-4 text-white/90">
-                  Agriculture fertilizer production emit X tons of greenhouse gasses, such as CO2, Methane and Ammonia gas, which also contribute to poor air quality in agricultural communities. They also are produced in large centralized plants where their prices fluctuate with global fuel costs, resulting in food price instability. 
+                  Agriculture fertilizer production emit X tons of greenhouse gasses, such as CO2, Methane and Ammonia gas, which also contribute to poor air quality in agricultural communities. They are produced in large centralized plants where their prices fluctuate with global fuel costs, resulting in food price instability. Organic alternatives are typically less effective, and the processing and transport of the animal waste also result in fine particulate pollution.
                 </p>
                 <a href={imgs.globalProblem} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
@@ -156,9 +156,9 @@ export default function App() {
             {/* Enhanced Organic Fertilizer Production */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div className="order-2 lg:order-1">
-                <h3 className="text-3xl font-bold">Solution: Enhanced Organic Fertilizer Production</h3>
+                <h3 className="text-3xl font-bold">Solution: Modular Plasma Based Fertilizer Production</h3>
                 <p className="mt-4 text-white/90">
-                  How renewable nitric acid boosts organic fertilizer value and yields.
+                  Unit Plasma fertilizer production systems installed at farms can generate fertilizer on demand by converting atmospheric nitrogen into Nitric acid. Mixing Nitric acid with manure not only caputures additional nitrogen, but it prevents ammonia gas emissions.  
                 </p>
                 <a href={imgs.enhancedOrganic} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
