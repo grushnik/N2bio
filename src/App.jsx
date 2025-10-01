@@ -98,9 +98,8 @@ export default function App() {
             <div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">Nitrogen Fixation</h1>
               <p className="mt-6 text-lg text-white/90 max-w-xl">
-                Plasma-driven nitrogen fixation for decarbonized fertilizer production. Modular, electrified
-                systems enable distributed fertilizers generation for poultry and dairy farms, with a minimal
-                carbon footprint.
+                Plasma nitrification uses high-energy plasma to fix atmospheric nitrogen into reactive nitrogen species,
+                enabling localized nitric acid or nitrate production for on-site fertilizer.
               </p>
               <div className="mt-8 flex gap-4">
                 <a
@@ -126,7 +125,7 @@ export default function App() {
                 />
               </div>
               <p className="mt-3 text-sm text-white/80">
-                What do chickens and plasma reactors have in common? The future of farming.
+                What do chickens and plasma torches have in common? The future of farming.
               </p>
             </div>
           </div>
@@ -134,7 +133,7 @@ export default function App() {
 
         {/* DIAGRAMS / IMAGES */}
         <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
-          <h2 className="text-4xl font-semibold">Diagrams & Opportunities</h2>
+          <h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>
           <div className="mt-10 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -144,9 +143,9 @@ export default function App() {
                 className="rounded-2xl border border-white/10 w-full"
               />
               <div>
-                <h3 className="text-3xl font-bold">Global Problem</h3>
+                <h3 className="text-3xl font-bold">The Problem We are Facing Today</h3>
                 <p className="mt-4 text-white/90">
-                  Explore today’s emissions, farm impacts, and downstream effects.
+                  Agriculture fertilizer production emit X tons of greenhouse gasses, such as CO2, Methane and Ammonia gas, which also contribute to poor air quality in agricultural communities. They also are produced in large centralized plants where their prices fluctuate with global fuel costs, resulting in food price instability. 
                 </p>
                 <a href={imgs.globalProblem} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
