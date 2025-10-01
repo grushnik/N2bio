@@ -133,7 +133,7 @@ export default function App() {
 
         {/* DIAGRAMS / IMAGES */}
         <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
-          //<h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>
+          <<h2 className="text-4xl font-semibold">The global problem and solution explained with illustrations</h2>>
           <div className="mt-10 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -188,26 +188,6 @@ export default function App() {
                 </a>
               </div>
             </div>
-
-            {/* Multiple Farm Application Opportunities */}
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <img
-                src={imgs.multipleFarm}
-                alt="Multiple Farm Application Opportunities diagram"
-                className="rounded-2xl border border-white/10 w-full"
-              />
-              <div>
-                <h3 className="text-3xl font-bold">Multiple Farm Application Opportunities</h3>
-                <p className="mt-4 text-white/90">
-                  A landscape of routes to value across fuels, fertilizer, and materials.
-                </p>
-                <a href={imgs.multipleFarm} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
-                  Open Diagram
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* TECHNOLOGY */}
         <section id="technology" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
