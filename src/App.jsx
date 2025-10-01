@@ -2,7 +2,13 @@ import React from "react";
 
 // --- Robust asset base resolver -------------------------------------------
 function ensureSlash(s) {
+  if (typeof s !== "string" || s.length === 0) return "/";
   return s.endsWith("/") ? s : s + "/";
+}
+
+function normalizePathname(p) {
+  // collapse multiple slashes like //N2bio//index.html -> /N2bio/index.html
+  return (p || "/").replace(/\/{2,}/g, "/");
 }
 
 function resolveBaseUrl() {
@@ -11,10 +17,12 @@ function resolveBaseUrl() {
       const b = import.meta.env.BASE_URL;
       if (typeof b === "string" && b.length > 0) return ensureSlash(b);
     }
-  } catch (_) {}
+  } catch {
+    // ignore
+  }
 
   if (typeof window !== "undefined" && window.location) {
-    const path = window.location.pathname || "/";
+    const path = normalizePathname(window.location.pathname || "/");
     const parts = path.split("/").filter(Boolean);
     if (parts.length > 0) return `/${parts[0]}/`;
   }
@@ -23,7 +31,8 @@ function resolveBaseUrl() {
 }
 
 function baseFromPathname(pathname) {
-  const parts = (pathname || "/").split("/").filter(Boolean);
+  const path = normalizePathname(pathname || "/");
+  const parts = path.split("/").filter(Boolean);
   return parts.length > 0 ? `/${parts[0]}/` : "/";
 }
 
@@ -33,11 +42,11 @@ export default function App() {
   // local assets resolved against the current deployment base
   const chickenSrc = `${base}chicken.jpg`;
   const imgs = {
-    globalProblem:            `${base}global-problem.png`,
-    enhancedOrganic:          `${base}enhanced-organic.png`,
-    renewableFuel:            `${base}renewable-fuel.png`,
-    syntheticFertilizerDecarb:`${base}synthetic-fertilizer-decarbonization.png`,
-    multipleFarm:             `${base}multiple-farm-opportunities.png`,
+    globalProblem:             `${base}global-problem.png`,
+    enhancedOrganic:           `${base}enhanced-organic.png`,
+    renewableFuel:             `${base}renewable-fuel.png`,
+    syntheticFertilizerDecarb: `${base}synthetic-fertilizer-decarbonization.png`,
+    multipleFarm:              `${base}multiple-farm-opportunities.png`,
   };
 
   const tests = [
@@ -187,6 +196,8 @@ export default function App() {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
 
         {/* TECHNOLOGY */}
         <section id="technology" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
@@ -251,7 +262,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* OVERVIEW (updated to your pitch video) */}
+        {/* OVERVIEW */}
         <section id="overview" className="mx-auto max-w-7xl px-6 py-20">
           <h2 className="text-3xl font-semibold">Let's talk about N2bio</h2>
           <div className="mt-6 aspect-video max-w-5xl mx-auto rounded-xl overflow-hidden border border-white/10">
