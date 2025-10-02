@@ -187,9 +187,9 @@ export default function App() {
                 className="rounded-2xl border border-white/10 w-full"
               />
               <div>
-                <h3 className="text-3xl font-bold">Economic upside </h3>
+                <h3 className="text-3xl font-bold">Solution: Plasma Add-On to Biodigester</h3>
                 <p className="mt-4 text-white/90">
-                  Farms will use an Anaerobic Digester Plant to produce Biogas, but it consumes energy to use, resulting in a high price of its product. By incorporating a Plasma fertilizer production systems, famers wil be able to supply their digesters with the heat produced by the plasma plant, and the Plasma plant can fix the ammonia waste from the digester into additional fertilizer, thereby increasing the efficiency of both systems. This results in lower cost of both fertilizer and biogas products.
+                  By pairing Anaerobic Digester Plants, which produce biogas, with a Plasma Fertilizer Production System, the heat from the plasma process can be recycled back into the digester, while the plasma unit generates additional fertilizer and recycles water on the farm. This integration boosts efficiency and reduces the overall cost of both fertilizer and biogas.
                 </p>
                 <a href={imgs.renewableFuel} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
