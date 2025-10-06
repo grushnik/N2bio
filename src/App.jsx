@@ -189,7 +189,7 @@ export default function App() {
               <div>
                 <h3 className="text-3xl font-bold">Solution: Plasma Add-On to Biodigester</h3>
                 <p className="mt-4 text-white/90">
-                  By pairing Anaerobic Digester Plants, which produce biogas, with a Plasma Fertilizer Production System, the heat from the plasma process can be recycled back into the digester, while the plasma unit generates additional fertilizer and recycles water on the farm. This integration boosts efficiency and reduces the overall cost of both fertilizer and biogas.
+                  By pairing Anaerobic Digester Plants, which produce biogas, with a Plasma Fertilizer Production System, the heat from the plasma process can be recycled back into the digester. At the same time, the plasma unit generates nitrogen-enriched fertilizer and recycles water on the farm. Want to learn more about the benefits of this solution? Check out the diagram on the left, which highlights them in detail.
                 </p>
                 <a href={imgs.renewableFuel} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
