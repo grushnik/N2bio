@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // --- Robust asset base resolver -------------------------------------------
 function ensureSlash(s) {
@@ -36,6 +36,23 @@ function baseFromPathname(pathname) {
   return parts.length > 0 ? `/${parts[0]}/` : "/";
 }
 
+// --- simple in-view fade-in helper ----------------------------------------
+function useInView(threshold = 0.2) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
 export default function App() {
   const base = resolveBaseUrl();
 
@@ -47,6 +64,8 @@ export default function App() {
     renewableFuel:             `${base}renewable-fuel.png`,
     syntheticFertilizerDecarb: `${base}synthetic-fertilizer-decarbonization.png`,
     multipleFarm:              `${base}multiple-farm-opportunities.png`,
+    // Your fisheye/box image in /public
+    n2bioFisheye:              `${base}N2bio.png`,
   };
 
   const tests = [
@@ -189,7 +208,7 @@ export default function App() {
               <div>
                 <h3 className="text-3xl font-bold">Solution: Plasma Add-On to Biodigester</h3>
                 <p className="mt-4 text-white/90">
-                  By pairing Anaerobic Digester Plants, which produce biogas, with a Plasma Fertilizer Production System, the heat from the plasma process can be recycled back into the digester. At the same time, the plasma unit generates nitrogen-enriched fertilizer and recycles water on the farm. Want to learn more about the benefits of this solution? Check out the diagram on the left, which highlights them in detail.
+                  By pairing anaerobic digester plant, which produce biogas, with a Plasma fertilizer production system, the heat from the plasma process can be recycled back into the digester. At the same time, the plasma unit generates nitrogen-enriched fertilizer and recycles water on the farm. Want to learn more about the benefits of this solution? Open the diagram below, which highlights them in detail.
                 </p>
                 <a href={imgs.renewableFuel} className="inline-block mt-6 px-4 py-2 bg-indigo-500 rounded-lg">
                   Open Diagram
@@ -261,6 +280,24 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* FUNNEL DIVIDER */}
+        <section aria-hidden="true" className="relative">
+          <svg
+            viewBox="0 0 1440 220"
+            className="w-full h-[160px] md:h-[200px] text-white/10"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,0 L1440,0 L960,200 C900,220 540,220 480,200 L0,0 Z"
+              fill="currentColor"
+              opacity="0.35"
+            />
+          </svg>
+        </section>
+
+        {/* WHITE BOX TRANSITION SECTION */}
+        <WhiteBoxTransition imgSrc={imgs.n2bioFisheye} />
 
         {/* OVERVIEW */}
         <section id="overview" className="mx-auto max-w-7xl px-6 py-20">
@@ -442,5 +479,56 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+/* ---------- Subcomponents ---------- */
+
+function WhiteBoxTransition({ imgSrc }) {
+  const { ref, inView } = useInView(0.15);
+
+  return (
+    <section id="white-box" className="mx-auto max-w-7xl px-6 pb-20">
+      <div
+        ref={ref}
+        className={[
+          "grid lg:grid-cols-2 gap-10 items-center rounded-2xl",
+          "bg-white/5 border border-white/10 p-6 md:p-10",
+          "transition-all duration-700",
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        ].join(" ")}
+      >
+        <div>
+          <h3 className="text-3xl font-bold">From Vision to Reality</h3>
+          <p className="mt-4 text-white/90">
+            Now that we’ve explored the problem, the plasma solution, how it works,
+            and the benefits—it’s time to see how it all converges.
+            We don’t do “black box.” Our <span className="font-semibold">white box</span> is a clear,
+            modular system that openly shows how plasma, chemistry, and circular
+            design work together on farm.
+          </p>
+          <p className="mt-4 text-white/90">
+            Think of this moment as a funnel: emissions reduction, water reuse,
+            organic fertilizer revenue, and digester enablement—<em>all</em> flowing into one
+            compact unit you can place in the field.
+          </p>
+          <p className="mt-4 text-white/80">
+            Transparent. Flexible. Built for real operations.
+          </p>
+        </div>
+
+        <figure className="rounded-2xl overflow-hidden border border-white/10 bg-black/10">
+          <img
+            src={imgSrc}
+            alt="N2bio white box in cornfield, fisheye perspective"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <figcaption className="sr-only">
+            N2bio white box showing a transparent window with plasma torch and an IBC on top.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
   );
 }
