@@ -122,8 +122,9 @@ export default function App() {
     renewableFuel:             `${base}renewable-fuel.png`,
     syntheticFertilizerDecarb: `${base}synthetic-fertilizer-decarbonization.png`,
     multipleFarm:              `${base}multiple-farm-opportunities.png`,
-    // Your fisheye/box image in /public
+    // assets you added
     n2bioFisheye:              `${base}N2bio.png`,
+    mdpiThumb:                 `${base}mdpi.png`,
   };
 
   const tests = [
@@ -189,10 +190,10 @@ export default function App() {
               </p>
               <div className="mt-8 flex gap-4">
                 <a
-                  href="#overview"
+                  href="#media"
                   className="px-5 py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-orange-500 font-semibold shadow hover:opacity-95"
                 >
-                  Watch N2Bio Overview
+                  Watch & Read
                 </a>
               </div>
             </div>
@@ -354,36 +355,78 @@ export default function App() {
           </svg>
         </section>
 
-        {/* WHITE BOX TRANSITION SECTION */}
+        {/* WHITE BOX TRANSITION SECTION (note the 10 kW mention) */}
         <WhiteBoxTransition imgSrc={imgs.n2bioFisheye} />
 
-        {/* OVERVIEW */}
-        <section id="overview" className="mx-auto max-w-7xl px-6 py-20">
-          <h2 className="text-3xl font-semibold">Let's talk about N2bio</h2>
-          <div className="mt-6 aspect-video max-w-5xl mx-auto rounded-xl overflow-hidden border border-white/10">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/t1R0xygjFOQ"
-              title="N2Bio Pitch"
-              frameBorder={0}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        </section>
+        {/* MEDIA ROW: two videos + mdpi paper */}
+        <section id="media" className="mx-auto max-w-7xl px-6 py-20">
+          <h2 className="text-3xl font-semibold mb-8">Watch & Read</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Video 1 */}
+            <div className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
+              <div className="aspect-video">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/t1R0xygjFOQ"
+                  title="Let's talk about N2bio"
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold">Let’s talk about N2bio</h3>
+                <p className="text-sm text-white/80 mt-1">
+                  Overview of the platform and on-farm nitrogen fixation.
+                </p>
+              </div>
+            </div>
 
-        {/* DEMO VIDEO */}
-        <section id="demo" className="mx-auto max-w-7xl px-6 py-20">
-          <h2 className="text-3xl font-semibold">100 kW Demo of Pilot Plant</h2>
-          <div className="mt-6 aspect-video max-w-5xl mx-auto rounded-xl overflow-hidden border border-white/10">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/4OhJHVxUD5k"
-              title="Pilot Plant Demo"
-              frameBorder={0}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            {/* Video 2 */}
+            <div className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
+              <div className="aspect-video">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/4OhJHVxUD5k"
+                  title="100 kW Demo of Pilot Plant"
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold">100 kW Demo of Pilot Plant</h3>
+                <p className="text-sm text-white/80 mt-1">
+                  Field-scale performance and thermal integration concepts.
+                </p>
+              </div>
+            </div>
+
+            {/* MDPI Paper */}
+            <a
+              href="https://www.mdpi.com/2504-3129/6/3/51"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl overflow-hidden border border-white/10 bg-white/5 group"
+              title="Peer-reviewed manuscript – 100 kW pilot plant"
+            >
+              <div className="aspect-video overflow-hidden">
+                <img
+                  src={imgs.mdpiThumb}
+                  alt="MDPI paper cover: High-Power Closed-Loop Pilot System for Nitric Acid Production"
+                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold">
+                  Peer-reviewed manuscript – 100 kW pilot plant
+                </h3>
+                <p className="text-sm text-white/80 mt-1">
+                  Full paper detailing performance of the closed-loop nitric acid pilot plant.
+                </p>
+              </div>
+            </a>
           </div>
         </section>
 
@@ -562,8 +605,9 @@ function WhiteBoxTransition({ imgSrc }) {
             Now that we’ve explored the problem, the plasma solution, how it works,
             and the benefits—it’s time to see how it all converges.
             We don’t do “black box.” Our <span className="font-semibold">white box</span> is a clear,
-            modular system that openly shows how 10 kW plasma, chemistry, and circular
-            design work together on farm.
+            modular system that openly shows how plasma, chemistry, and circular
+            design work together on farm. This featured unit is a <strong>10 kW</strong> system
+            designed for on-farm deployment.
           </p>
           <p className="mt-4 text-white/90">
             Think of this moment as a funnel: emissions reduction, water reuse,
