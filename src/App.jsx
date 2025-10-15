@@ -53,6 +53,64 @@ function useInView(threshold = 0.2) {
   return { ref, inView };
 }
 
+/* ---------- Collapsible section ---------- */
+function Collapsible({ id, title, defaultOpen = false, children }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const contentRef = useRef(null);
+  const [maxH, setMaxH] = useState(0);
+
+  // Measure height for smooth max-height animation
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    if (open) setMaxH(el.scrollHeight);
+    else setMaxH(0);
+  }, [open, children]);
+
+  // Auto-open if navigated directly with hash (e.g., #diagrams)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash === `#${id}`) {
+      setOpen(true);
+      setTimeout(
+        () =>
+          document.getElementById(id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          }),
+        0
+      );
+    }
+  }, [id]);
+
+  return (
+    <section id={id} className="mx-auto max-w-7xl px-6 py-8 border-t border-white/10">
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="text-3xl md:text-4xl font-semibold">{title}</h2>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={`${id}-content`}
+          className="shrink-0 px-4 py-2 rounded-lg bg-white text-[#5b57a3] font-semibold hover:bg-gray-100 border border-white/10"
+        >
+          {open ? "Hide diagrams" : "Show diagrams"}
+        </button>
+      </div>
+
+      <div
+        id={`${id}-content`}
+        className="transition-all duration-500 ease-in-out overflow-hidden"
+        style={{ maxHeight: maxH }}
+      >
+        <div ref={contentRef} className={open ? "pt-8" : ""}>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   const base = resolveBaseUrl();
 
@@ -159,9 +217,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* DIAGRAMS / IMAGES */}
-        <section id="diagrams" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
-          <div className="mt-10 space-y-16">
+        {/* DIAGRAMS / IMAGES (COLLAPSIBLE) */}
+        <Collapsible id="diagrams" title="Diagrams & System Overview" defaultOpen={false}>
+          <div className="mt-2 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <img
@@ -216,7 +274,7 @@ export default function App() {
               </div>
             </div>
           </div>
-        </section>
+        </Collapsible>
 
         {/* TECHNOLOGY */}
         <section id="technology" className="mx-auto max-w-7xl px-6 py-20 border-t border-white/10">
@@ -316,7 +374,7 @@ export default function App() {
 
         {/* DEMO VIDEO */}
         <section id="demo" className="mx-auto max-w-7xl px-6 py-20">
-          <h2 className="text-3xl font-semibold">Demo of Pilot Plant</h2>
+          <h2 className="text-3xl font-semibold">100 kW Demo of Pilot Plant</h2>
           <div className="mt-6 aspect-video max-w-5xl mx-auto rounded-xl overflow-hidden border border-white/10">
             <iframe
               className="w-full h-full"
@@ -504,7 +562,7 @@ function WhiteBoxTransition({ imgSrc }) {
             Now that we’ve explored the problem, the plasma solution, how it works,
             and the benefits—it’s time to see how it all converges.
             We don’t do “black box.” Our <span className="font-semibold">white box</span> is a clear,
-            modular system that openly shows how plasma, chemistry, and circular
+            modular system that openly shows how 10 kW plasma, chemistry, and circular
             design work together on farm.
           </p>
           <p className="mt-4 text-white/90">
