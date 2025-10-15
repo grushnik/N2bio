@@ -54,7 +54,14 @@ function useInView(threshold = 0.2) {
 }
 
 /* ---------- Collapsible section ---------- */
-function Collapsible({ id, title, defaultOpen = false, children }) {
+function Collapsible({
+  id,
+  title,
+  defaultOpen = false,
+  openLabel = "Hide",
+  closedLabel = "Show",
+  children,
+}) {
   const [open, setOpen] = useState(defaultOpen);
   const contentRef = useRef(null);
   const [maxH, setMaxH] = useState(0);
@@ -67,7 +74,7 @@ function Collapsible({ id, title, defaultOpen = false, children }) {
     else setMaxH(0);
   }, [open, children]);
 
-  // Auto-open if navigated directly with hash (e.g., #diagrams)
+  // Auto-open if navigated directly with hash (e.g., #diagrams or #applications)
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.location.hash === `#${id}`) {
@@ -94,7 +101,7 @@ function Collapsible({ id, title, defaultOpen = false, children }) {
           aria-controls={`${id}-content`}
           className="shrink-0 px-4 py-2 rounded-lg bg-white text-[#5b57a3] font-semibold hover:bg-gray-100 border border-white/10"
         >
-          {open ? "Hide diagrams" : "Show diagrams"}
+          {open ? openLabel : closedLabel}
         </button>
       </div>
 
@@ -122,7 +129,6 @@ export default function App() {
     renewableFuel:             `${base}renewable-fuel.png`,
     syntheticFertilizerDecarb: `${base}synthetic-fertilizer-decarbonization.png`,
     multipleFarm:              `${base}multiple-farm-opportunities.png`,
-    // assets you added
     n2bioFisheye:              `${base}N2bio.png`,
     mdpiThumb:                 `${base}mdpi.png`,
   };
@@ -219,7 +225,7 @@ export default function App() {
         </section>
 
         {/* DIAGRAMS / IMAGES (COLLAPSIBLE) */}
-        <Collapsible id="diagrams" title="Diagrams & System Overview" defaultOpen={false}>
+        <Collapsible id="diagrams" title="Diagrams & System Overview" defaultOpen={false} closedLabel="Show diagrams" openLabel="Hide diagrams">
           <div className="mt-2 space-y-16">
             {/* Global Problem */}
             <div className="grid lg:grid-cols-2 gap-10 items-center">
@@ -313,32 +319,35 @@ export default function App() {
           </ol>
         </section>
 
-        {/* BENEFITS */}
-        <section id="applications" className="border-t border-b border-white/10 py-20 px-6">
-          <div className="mx-auto max-w-7xl">
-            <h2 className="text-4xl font-semibold">Benefits</h2>
-            <div className="mt-10 grid md:grid-cols-2 gap-8 text-lg">
-              <div className="rounded-xl border border-white/10 bg-white/10 p-6">
-                <h3 className="font-semibold">Reduced Emissions &amp; Costs</h3>
-                <p className="mt-2 text-white/80">
-                  Reduced emissions, transportation costs, and fertilizer price fluctuations.
-                </p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/10 p-6">
-                <h3 className="font-semibold">Water Reuse &amp; Lower Emissions</h3>
-                <p className="mt-2 text-white/80">Water is reused and ammonia greenhouse emissions are eliminated, heat from plasma is reused.</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/10 p-6">
-                <h3 className="font-semibold">Organic Fertilizer Revenue</h3>
-                <p className="mt-2 text-white/80">Organic nitrogen-rich fertilizer becomes a source of revenue.</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/10 p-6">
-                <h3 className="font-semibold">Anaerobic Digesters Enabled</h3>
-                <p className="mt-2 text-white/80">Makes anaerobic digesters in poultry farms possible and economical.</p>
-              </div>
+        {/* BENEFITS (COLLAPSIBLE) */}
+        <Collapsible
+          id="applications"
+          title="Benefits"
+          defaultOpen={false}
+          closedLabel="Learn about benefits"
+          openLabel="Hide benefits"
+        >
+          <div className="mt-6 grid md:grid-cols-2 gap-8 text-lg">
+            <div className="rounded-xl border border-white/10 bg-white/10 p-6">
+              <h3 className="font-semibold">Reduced Emissions &amp; Costs</h3>
+              <p className="mt-2 text-white/80">
+                Reduced emissions, transportation costs, and fertilizer price fluctuations.
+              </p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/10 p-6">
+              <h3 className="font-semibold">Water Reuse &amp; Lower Emissions</h3>
+              <p className="mt-2 text-white/80">Water is reused and ammonia greenhouse emissions are eliminated, heat from plasma is reused.</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/10 p-6">
+              <h3 className="font-semibold">Organic Fertilizer Revenue</h3>
+              <p className="mt-2 text-white/80">Organic nitrogen-rich fertilizer becomes a source of revenue.</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/10 p-6">
+              <h3 className="font-semibold">Anaerobic Digesters Enabled</h3>
+              <p className="mt-2 text-white/80">Makes anaerobic digesters in poultry farms possible and economical.</p>
             </div>
           </div>
-        </section>
+        </Collapsible>
 
         {/* FUNNEL DIVIDER */}
         <section aria-hidden="true" className="relative">
@@ -355,7 +364,7 @@ export default function App() {
           </svg>
         </section>
 
-        {/* WHITE BOX TRANSITION SECTION (note the 10 kW mention) */}
+        {/* WHITE BOX TRANSITION SECTION (includes Request link) */}
         <WhiteBoxTransition imgSrc={imgs.n2bioFisheye} />
 
         {/* MEDIA ROW: two videos + mdpi paper */}
@@ -448,21 +457,19 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {testResults.map((t) => (
-                  <tr key={t.name} className="border-b border-white/10">
-                    <td className="py-1 pr-4">{t.name}</td>
-                    <td className="py-1 pr-4">
-                      <code>{String(t.pathname)}</code>
-                    </td>
-                    <td className="py-1 pr-4">
-                      <code>{t.expected}</code>
-                    </td>
-                    <td className="py-1 pr-4">
-                      <code>{t.got}</code>
-                    </td>
-                    <td className="py-1 pr-4">{t.pass ? "✅" : "❌"}</td>
-                  </tr>
-                ))}
+                {tests.map((t) => {
+                  const got = baseFromPathname(t.pathname);
+                  const pass = got === t.expected;
+                  return (
+                    <tr key={t.name} className="border-b border-white/10">
+                      <td className="py-1 pr-4">{t.name}</td>
+                      <td className="py-1 pr-4"><code>{String(t.pathname)}</code></td>
+                      <td className="py-1 pr-4"><code>{t.expected}</code></td>
+                      <td className="py-1 pr-4"><code>{got}</code></td>
+                      <td className="py-1 pr-4">{pass ? "✅" : "❌"}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </details>
@@ -489,85 +496,27 @@ export default function App() {
             </div>
             {/* Social links */}
             <div className="mt-4 flex gap-4 text-xl">
-              <a
-                href="https://www.radomcorp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Website"
-                title="Website — radomcorp.com"
-              >
-                🌐
-              </a>
-              <a
-                href="https://www.instagram.com/egrushnikova/?hl=en"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                title="Instagram"
-              >
-                📷
-              </a>
-              <a
-                href="https://x.com/RadomCorpPlasma"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                title="X (Twitter)"
-              >
-                ✖
-              </a>
-              <a
-                href="https://www.linkedin.com/company/radom-corp-high-power"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                title="LinkedIn"
-              >
-                in
-              </a>
-              <a
-                href="https://www.youtube.com/@RadomCorporation"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                title="YouTube"
-              >
-                ▶
-              </a>
+              <a href="https://www.radomcorp.com/" target="_blank" rel="noopener noreferrer" aria-label="Website" title="Website — radomcorp.com">🌐</a>
+              <a href="https://www.instagram.com/egrushnikova/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">📷</a>
+              <a href="https://x.com/RadomCorpPlasma" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">✖</a>
+              <a href="https://www.linkedin.com/company/radom-corp-high-power" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">in</a>
+              <a href="https://www.youtube.com/@RadomCorporation" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">▶</a>
             </div>
           </div>
           <div>
             <h3 className="font-semibold mb-3">Plasma Source Products</h3>
             <ul className="space-y-2 text-white/90">
-              <li>
-                <a href="https://www.radomcorp.com/products/mira-altair">
-                  1.5 kW Altair &amp; Mira
-                </a>
-              </li>
-              <li>
-                <a href="https://www.radomcorp.com/products/polaris">
-                  10 kW Polaris
-                </a>
-              </li>
-              <li>
-                <a href="https://www.radomcorp.com/products/sirius">
-                  100 kW Sirius
-                </a>
-              </li>
+              <li><a href="https://www.radomcorp.com/products/mira-altair">1.5 kW Altair &amp; Mira</a></li>
+              <li><a href="https://www.radomcorp.com/products/polaris">10 kW Polaris</a></li>
+              <li><a href="https://www.radomcorp.com/products/sirius">100 kW Sirius</a></li>
             </ul>
           </div>
           <div>
             <h3 className="font-semibold mb-3">Explore</h3>
             <ul className="space-y-2 text-white/90">
-              <li>
-                <a href="https://www.radomcorp.com/applications">Applications</a>
-              </li>
-              <li>
-                <a href="https://www.radominstruments.com/">Radom Instruments</a>
-              </li>
-              <li>
-                <a href="https://www.radomcorp.com/request-form">Contact Us</a>
-              </li>
+              <li><a href="https://www.radomcorp.com/applications">Applications</a></li>
+              <li><a href="https://www.radominstruments.com/">Radom Instruments</a></li>
+              <li><a href="https://www.radomcorp.com/request-form">Contact Us</a></li>
             </ul>
           </div>
         </div>
@@ -614,9 +563,15 @@ function WhiteBoxTransition({ imgSrc }) {
             organic fertilizer revenue, and digester enablement—<em>all</em> flowing into one
             compact unit you can place in the field.
           </p>
-          <p className="mt-4 text-white/80">
-            Transparent. Flexible. Built for real operations.
-          </p>
+
+          <div className="mt-6">
+            <a
+              href="https://www.radomcorp.com/request-form"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#5b57a3] font-semibold hover:bg-gray-100 shadow"
+            >
+              Request white paper / quote for the 10 kW Box →
+            </a>
+          </div>
         </div>
 
         <figure className="rounded-2xl overflow-hidden border border-white/10 bg-black/10">
